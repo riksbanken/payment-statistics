@@ -2,7 +2,7 @@
 
 import pycountry as pc
 
-from payment_statistics_utils.enums.full_enums import (
+from ..enums.full_enums import (
     CardFunction,
     CardType,
     ConcentrationRatioType,
