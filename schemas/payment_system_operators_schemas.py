@@ -7,7 +7,7 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field, field_validator
 
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     ConcentrationRatioTypeMeta,
     ConcentrationRatioValueMeta,
     CounterPartyCountryPaymentSystemOperatorsMeta,
@@ -21,20 +21,20 @@ from payment_statistics_utils.enums.field_metadata_enums import (
     PaymentTypePaymentSystemOperatorsMeta,
     ValueOfTransactionsMeta,
 )
-from payment_statistics_utils.enums.full_enums import (
+from ..enums.full_enums import (
     ConcentrationRatioType,
     ParticipantSector,
     ParticipantType,
     PaymentSystem,
 )
-from payment_statistics_utils.enums.payment_system_operators_enums import (
+from ..enums.payment_system_operators_enums import (
     PaymentSystemMetricConcentration,
     PaymentSystemMetricParticipants,
     PaymentSystemMetricTransactions,
     PaymentTypePaymentSystems,
 )
-from payment_statistics_utils.utils.field_validaton_functions import validate_country
-from payment_statistics_utils.utils.types import Country
+from ..utils.field_validaton_functions import validate_country
+from ..utils.types import Country
 
 
 class BasePaymentSystemOperators(BaseModel, extra="forbid"):

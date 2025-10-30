@@ -9,14 +9,14 @@ from typing import Literal
 
 from pydantic import Field, PastDate, field_validator
 
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     PeriodMeta,
     ReportedPaymentSystemMetricMeta,
     SchemaVersionMeta,
 )
-from payment_statistics_utils.enums.full_enums import PaymentSystemMetric
-from payment_statistics_utils.schemas.base_report_schema import BaseReport
-from payment_statistics_utils.utils.field_validaton_functions import (
+from ..enums.full_enums import PaymentSystemMetric
+from ..schemas.base_report_schema import BaseReport
+from ..utils.field_validaton_functions import (
     validate_quarterly,
 )
 
