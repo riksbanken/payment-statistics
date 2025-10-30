@@ -29,8 +29,8 @@ from pydantic import (
 from pydantic_core import InitErrorDetails
 from typing_extensions import Self
 
-from payment_statistics_utils.codelists.codelists import country
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..codelists.codelists import country
+from ..enums.field_metadata_enums import (
     AccountCurrencyMeta,
     AccountValueMeta,
     CardTypeMeta,
@@ -48,12 +48,12 @@ from payment_statistics_utils.enums.field_metadata_enums import (
     TransactionInitiatedMeta,
     TransactionTypeMeta,
 )
-from payment_statistics_utils.enums.full_enums import (
+from ..enums.full_enums import (
     Contactless,
     RemoteInitiation,
     TransactionType,
 )
-from payment_statistics_utils.enums.transaction_enums import (
+from ..enums.transaction_enums import (
     CardTypeCardPaymentAcquirer,
     CardTypeCardPaymentIssuer,
     InitiationChannelCardPaymentAquierer,
@@ -64,20 +64,20 @@ from payment_statistics_utils.enums.transaction_enums import (
     PaymentTypeCardPaymentAcquirer,
     PaymentTypeCardPaymentIssuer,
 )
-from payment_statistics_utils.schemas.transaction_schemas import BaseTransaction
-from payment_statistics_utils.utils.field_validaton_functions import (
+from ..schemas.transaction_schemas import BaseTransaction
+from ..utils.field_validaton_functions import (
     validate_country,
     validate_currency,
     validate_date,
     validate_merchant_category_code,
-    validate_timestamp,
+    validate_optional_timestamp,
 )
-from payment_statistics_utils.utils.model_validation_functions import (
+from ..utils.model_validation_functions import (
     model_validation_error,
     valdate_transaction_cleared_between_dates,
     validate_payment_type_and_reported_payment_type,
 )
-from payment_statistics_utils.utils.types import (
+from ..utils.types import (
     Country,
     Currency,
     MerchantCategory,
@@ -150,7 +150,7 @@ class BaseCardPayment(BaseTransaction, extra="forbid"):
     @classmethod
     def validate_timestamp_transaction_initiated(cls, v: str | None) -> str | None:
         """Validate timestamp."""
-        return validate_timestamp(v)
+        return validate_optional_timestamp(v)
 
     @field_validator("transaction_cleared", mode="before")
     @classmethod
@@ -301,28 +301,6 @@ class CardPaymentIssuer(BaseCardPayment, extra="forbid"):
                 )
             )
 
-        if self.payment_scheme == "PCS_MCRD" and self.transaction_initiated is None:
-            errors.append(
-                model_validation_error(
-                    ("transaction_initiated",),
-                    self.transaction_initiated,
-                    "Field transaction_initiated can't be missing when payment scheme is Mastercard.",
-                )
-            )
-
-        if (
-            self.transaction_initiated
-            and self.transaction_cleared
-            and self.transaction_initiated.date() > self.transaction_cleared
-        ):
-            errors.append(
-                model_validation_error(
-                    ("transaction_initiated", "transaction_cleared"),
-                    f"{self.transaction_initiated}, {self.transaction_cleared}",
-                    "Field transaction_cleared must be the same or after transaction_initiated.",
-                )
-            )
-
         if self.reported_payment_type:
             if result := validate_payment_type_and_reported_payment_type(
                 self.payment_type, self.reported_payment_type
@@ -447,28 +425,6 @@ class CardPaymentAcquirer(BaseCardPayment, extra="forbid"):
                     ("transaction_type",),
                     self.transaction_type,
                     "Card payments have to be reported with a transaction type.",
-                )
-            )
-
-        if self.payment_scheme == "PCS_MCRD" and self.transaction_initiated is None:
-            errors.append(
-                model_validation_error(
-                    ("transaction_initiated",),
-                    self.transaction_initiated,
-                    "Field transaction_initiated can't be missing when payment scheme is Mastercard.",
-                )
-            )
-
-        if (
-            self.transaction_initiated
-            and self.transaction_cleared
-            and self.transaction_initiated.date() > self.transaction_cleared
-        ):
-            errors.append(
-                model_validation_error(
-                    ("transaction_initiated", "transaction_cleared"),
-                    f"{self.transaction_initiated}, {self.transaction_cleared}",
-                    "Field transaction_cleared must be the same or after transaction_initiated.",
                 )
             )
 
