@@ -12,7 +12,7 @@ from typing import Self
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     CardFunctionMeta,
     CardTypeMeta,
     ContactlessFunctionMeta,
@@ -26,13 +26,13 @@ from payment_statistics_utils.enums.field_metadata_enums import (
     TerminalFunctionMeta,
     TypeOfAccountMeta,
 )
-from payment_statistics_utils.enums.full_enums import (
+from ..enums.full_enums import (
     CardFunction,
     ContactlessFunction,
     EmoneyFunction,
     TypeOfAccount,
 )
-from payment_statistics_utils.enums.quantity_items_enums import (
+from ..enums.quantity_items_enums import (
     CardTypeCard,
     PaymentSchemeCard,
     PaymentServiceUserCard,
@@ -46,8 +46,8 @@ from payment_statistics_utils.enums.quantity_items_enums import (
     TerminalFunctionEMoneyTerminals,
     TerminalFunctionPosTerminal,
 )
-from payment_statistics_utils.utils.field_validaton_functions import validate_country
-from payment_statistics_utils.utils.types import Country
+from ..utils.field_validaton_functions import validate_country
+from ..utils.types import Country
 
 
 class BaseQuantityItems(BaseModel, extra="forbid"):

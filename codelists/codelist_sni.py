@@ -1,10 +1,10 @@
 """Code list for sni(Standarden för svensk näringsgrensindelning) code."""
 
-from payment_statistics_utils.codelists.codelists import Codelist
+from ..codelists.codelists import Codelist
 
 
 sni_codes: Codelist = {
-    "00000": "Sni kod saknas. Kod specifik för Riksbank.",
+    "00000": "Sni kod saknas. Kod skapad av Riksbanken.",
     "01110": "Odling av spannmål (utom ris), baljväxter och oljeväxter",
     "01120": "Odling av ris",
     "01131": "Potatisodling",

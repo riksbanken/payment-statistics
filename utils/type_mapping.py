@@ -7,56 +7,56 @@ from enum import StrEnum
 
 from pydantic import BaseModel
 
-from payment_statistics_utils.enums.aggregates_enums import (
+from ..enums.aggregates_enums import (
     PaymentTypeEMoney,
     PaymentTypeMoneyRemittances,
     PaymentTypeOTC,
     PaymentTypePaymentInitiationServices,
 )
-from payment_statistics_utils.enums.direct_debits_enums import PaymentTypeDirectDebits
-from payment_statistics_utils.enums.payment_system_operators_enums import (
+from ..enums.direct_debits_enums import PaymentTypeDirectDebits
+from ..enums.payment_system_operators_enums import (
     PaymentSystemMetricConcentration,
     PaymentSystemMetricParticipants,
     PaymentSystemMetricTransactions,
 )
-from payment_statistics_utils.enums.quantity_items_enums import (
+from ..enums.quantity_items_enums import (
     QuantityItemsATMs,
     QuantityItemsCard,
     QuantityItemsEMoneyTerminal,
     QuantityItemsPaymentAccounts,
     QuantityItemsPosTerminal,
 )
-from payment_statistics_utils.enums.transaction_enums import (
+from ..enums.transaction_enums import (
     PaymentTypeCardPaymentAcquirer,
     PaymentTypeCardPaymentIssuer,
     PaymentTypeCashTransactionATMOwners,
     PaymentTypeCreditTransfer,
     PaymentTypeInstantCreditTransfer,
 )
-from payment_statistics_utils.schemas.aggregate_schemas import (
+from ..schemas.aggregate_schemas import (
     OTC,
     EMoney,
     MoneyRemittances,
     PaymentInitiationServices,
 )
-from payment_statistics_utils.schemas.card_transaction_schemas import (
+from ..schemas.card_transaction_schemas import (
     CardPaymentAcquirer,
     CardPaymentIssuer,
 )
-from payment_statistics_utils.schemas.direct_debits_schema import DirectDebits
-from payment_statistics_utils.schemas.payment_system_operators_schemas import (
+from ..schemas.direct_debits_schema import DirectDebits
+from ..schemas.payment_system_operators_schemas import (
     ConcentrationRatio,
     ParticipantsInPaymentSystems,
     TransactionsInPaymentSystems,
 )
-from payment_statistics_utils.schemas.quantity_items_schemas import (
+from ..schemas.quantity_items_schemas import (
     ATMs,
     Cards,
     EMoneyTerminals,
     PaymentAccounts,
     PosTerminals,
 )
-from payment_statistics_utils.schemas.transaction_schemas import (
+from ..schemas.transaction_schemas import (
     CashTransactionsATMOwners,
     CreditTransfer,
     InstantCreditTransfer,

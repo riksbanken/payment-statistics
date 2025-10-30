@@ -2,7 +2,7 @@
 
 from enum import StrEnum
 
-from payment_statistics_utils.enums.full_enums import PaymentSystemMetric, PaymentType
+from ..enums.full_enums import PaymentSystemMetric, PaymentType
 
 
 class PaymentTypePaymentSystems(StrEnum):

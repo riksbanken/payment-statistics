@@ -4,11 +4,11 @@ from decimal import Decimal
 
 from pydantic import BaseModel, Field, field_validator
 
-from payment_statistics_utils.enums.direct_debits_enums import (
+from ..enums.direct_debits_enums import (
     InitiationChannelDirectDebits,
     PaymentTypeDirectDebits,
 )
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     IdMeta,
     InitiationChannelMeta,
     NumberOfMeta,
@@ -16,8 +16,8 @@ from payment_statistics_utils.enums.field_metadata_enums import (
     TransactionCurrencyMeta,
     TransactionValueOtherMeta,
 )
-from payment_statistics_utils.utils.field_validaton_functions import validate_currency
-from payment_statistics_utils.utils.types import Currency
+from ..utils.field_validaton_functions import validate_currency
+from ..utils.types import Currency
 
 
 class DirectDebits(BaseModel, extra="forbid"):

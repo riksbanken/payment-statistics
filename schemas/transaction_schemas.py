@@ -7,7 +7,6 @@ item 4. ATM cash withdrawal,
 item 6. ATM cash deposit.
 """
 
-from datetime import datetime
 from decimal import Decimal
 
 from pydantic import (
@@ -22,7 +21,7 @@ from pydantic import (
 from pydantic_core import InitErrorDetails
 from typing_extensions import Self
 
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     AccountCurrencyInstantCreditTransfersMeta,
     AccountValueInstantCreditTransfersMeta,
     CounterPartyCountryCardAcquirersMeta,
@@ -45,12 +44,12 @@ from payment_statistics_utils.enums.field_metadata_enums import (
     TransactionTimeMeta,
     TransactionValueOtherMeta,
 )
-from payment_statistics_utils.enums.full_enums import (
+from ..enums.full_enums import (
     PaymentServiceUser,
     RemoteInitiation,
     RoleInTransaction,
 )
-from payment_statistics_utils.enums.transaction_enums import (
+from ..enums.transaction_enums import (
     InitiationChannelCreditTransfer,
     InitiationChannelInstantCreditTransfer,
     PaymentSchemeCashTransactionsATMOwners,
@@ -61,20 +60,21 @@ from payment_statistics_utils.enums.transaction_enums import (
     PaymentTypeInstantCreditTransfer,
     PaymentTypeTransactions,
 )
-from payment_statistics_utils.utils.field_validaton_functions import (
+from ..utils.field_validaton_functions import (
     validate_country,
     validate_currency,
     validate_date,
     validate_locality,
     validate_sni_code,
+    validate_timestamp,
 )
-from payment_statistics_utils.utils.model_validation_functions import (
+from ..utils.model_validation_functions import (
     model_validation_error,
     valdate_transaction_day_between_dates,
     valdate_transaction_time_between_dates,
     validate_payment_type_and_reported_payment_type,
 )
-from payment_statistics_utils.utils.types import (
+from ..utils.types import (
     Country,
     Currency,
     Locality,
@@ -585,17 +585,9 @@ class InstantCreditTransfer(BaseTransaction, extra="forbid"):
 
     @field_validator("transaction_time", mode="before")
     @classmethod
-    def validate_timestamp_transaction_initiated(cls, v: datetime | str) -> datetime:
+    def validate_timestamp_transaction_initiated(cls, v: str) -> str:
         """Validate timestamp."""
-        if isinstance(v, datetime):
-            return v
-
-        try:
-            return datetime.strptime(v, "%Y-%m-%d %H:%M:%S")
-        except ValueError:
-            raise ValueError(  # noqa: B904
-                f"Transaction initiated has to be in format '%Y-%m-%d %H:%M:%S' got {type(v)}: {v}"
-            )
+        return validate_timestamp(v)
 
     @model_validator(mode="after")
     def validate_model(self) -> Self:  # noqa: C901

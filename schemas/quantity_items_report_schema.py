@@ -20,14 +20,14 @@ from pydantic import (
     field_validator,
 )
 
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     PeriodMeta,
     ReportedQuantityItemMeta,
     SchemaVersionMeta,
 )
-from payment_statistics_utils.enums.full_enums import QuantityItems
-from payment_statistics_utils.schemas.base_report_schema import BaseReport
-from payment_statistics_utils.utils.field_validaton_functions import (
+from ..enums.full_enums import QuantityItems
+from ..schemas.base_report_schema import BaseReport
+from ..utils.field_validaton_functions import (
     validate_half_year,
 )
 

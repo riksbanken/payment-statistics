@@ -13,16 +13,16 @@ from pydantic import (
     field_validator,
 )
 
-from payment_statistics_utils.enums.direct_debits_enums import (
+from ..enums.direct_debits_enums import (
     PaymentTypeDirectDebits,
 )
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     PeriodMeta,
     ReportedPaymentTypeDDMeta,
     SchemaVersionMeta,
 )
-from payment_statistics_utils.schemas.base_report_schema import BaseReport
-from payment_statistics_utils.utils.field_validaton_functions import (
+from ..schemas.base_report_schema import BaseReport
+from ..utils.field_validaton_functions import (
     validate_date,
     validate_last_day_of_month,
 )

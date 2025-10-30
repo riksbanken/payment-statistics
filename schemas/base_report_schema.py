@@ -13,15 +13,15 @@ from pydantic import (
     field_validator,
 )
 
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     EnvironmentMeta,
     ItemsMeta,
     ReportDatetimeMeta,
     ReporterIdMeta,
     ReportPartMeta,
 )
-from payment_statistics_utils.enums.full_enums import Environment
-from payment_statistics_utils.utils.field_validaton_functions import (
+from ..enums.full_enums import Environment
+from ..utils.field_validaton_functions import (
     validate_timestamp,
 )
 
@@ -68,7 +68,7 @@ class BaseReport(BaseModel, extra="forbid"):
 
     @field_validator("report_datetime", mode="before")
     @classmethod
-    def validate_report_datetime(cls, report_datetime: str) -> str | None:
+    def validate_report_datetime(cls, report_datetime: str) -> str:
         """Validate that report date is in correct format."""
         return validate_timestamp(report_datetime)
 

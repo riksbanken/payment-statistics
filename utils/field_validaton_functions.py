@@ -4,10 +4,10 @@ import calendar
 import re
 from datetime import datetime
 
-from payment_statistics_utils.codelists.codelist_mcc import merchant_category_code
-from payment_statistics_utils.codelists.codelist_sni import sni_codes
-from payment_statistics_utils.codelists.codelists import country, currency
-from payment_statistics_utils.codelists.locality import localities
+from ..codelists.codelist_mcc import merchant_category_code
+from ..codelists.codelist_sni import sni_codes
+from ..codelists.codelists import country, currency
+from ..codelists.locality import localities
 
 
 def validate_currency(v: str) -> str:
@@ -45,20 +45,35 @@ def validate_date(v: str) -> str:
     return v
 
 
-def validate_timestamp(v: str | None) -> str | None:
+def validate_timestamp(v: str) -> str:
+    """Validate timestamp.
+
+    Allowed timestamp format is datetime.
+    Example "2025-01-10T14:00:01."
+    """
+    try:
+        datetime.strptime(v, "%Y-%m-%dT%H:%M:%S")
+    except ValueError:
+        raise ValueError(  # noqa: B904
+            f"Timestamp has to be in format '%Y-%m-%dT%H:%M:%S' got {type(v)}: {v}"
+        )
+    return v
+
+
+def validate_optional_timestamp(v: str | None) -> str | None:
     """Validate timestamp or None.
 
     Allowed timestamp format is datetime.
-    Example "2025-01-10 14:00:01."
+    Example "2025-01-10T14:00:01."
     """
     if v is None:
         return v
 
     try:
-        datetime.strptime(v, "%Y-%m-%d %H:%M:%S")
+        datetime.strptime(v, "%Y-%m-%dT%H:%M:%S")
     except ValueError:
         raise ValueError(  # noqa: B904
-            f"Timestamp has to be in format '%Y-%m-%d %H:%M:%S' got {type(v)}: {v}"
+            f"Timestamp has to be in format '%Y-%m-%dT%H:%M:%S' got {type(v)}: {v}"
         )
     return v
 
