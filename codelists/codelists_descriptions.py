@@ -1,6 +1,6 @@
 """Codelists descriptions."""
 
-from payment_statistics_utils.enums.full_enums import (
+from ..enums.full_enums import (
     CardFunction,
     CardType,
     ConcentrationRatioType,
@@ -59,7 +59,7 @@ quantity_item_desc: dict[QuantityItems, str] = {
 
 initiation_channel_desc: dict[InitiationChannel, str] = {
     InitiationChannel.NonElectronic: "Includes card payments initiated via imprinters, post or telephone. Can be both remote and non-remote initiated.",
-    InitiationChannel.PaperBased: "Includes paper-based initiations over the counter, via post and email. Can be both remote and non-remote initiated.",
+    InitiationChannel.PaperBased: "Includes paper-based initiations over the counter and post. Can be both remote and non-remote initiated.",
     InitiationChannel.FileBatch: "Each transaction included in a file/batch is counted as a separate transaction. Always reported as remotely initiated transactions.",
     InitiationChannel.SinglePayment: " An electronically initiated transaction that is independent from other transactions, i.e. that is not part of a group of transactions jointly initiated.",
     InitiationChannel.OnlineBanking: "Transactions via the internet bank, either via a web browser or the customer's banking app on the phone. Always reported as remotely initiated transactions.",
@@ -76,7 +76,7 @@ initiation_channel_desc: dict[InitiationChannel, str] = {
     InitiationChannel.EMoneyAccountCard: "Cards which give access to e-money stored on e-money accounts are cards linked to e-money (card) accounts.",
     InitiationChannel.EMoneyOther: "E-money payment initiated from account other than through a card or mobile payment",
     InitiationChannel.RecurringSwish: "Includes recurring Swish payments.",
-    InitiationChannel.Other: "Includes transactions that do not belong to any of the other specified categories. Can be both remote and non-remote initiated.",
+    InitiationChannel.Other: "Includes transactions that do not belong to any of the other specified categories. For credit transfers other includes transactions initiated via email or phone. Can be both remote and non-remote initiated.",
     InitiationChannel.PISP: "Includes transactions initiated by PISP. If information is available about both the fact that the transaction is initiated via a PISP and what other initiation channel is used for the transaction, PISP takes precedence and is specified for the transaction. Always reported as remotely initiated transactions.",
 }
 
