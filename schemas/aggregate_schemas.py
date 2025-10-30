@@ -21,7 +21,7 @@ from pydantic import (
 )
 from pydantic_core import InitErrorDetails
 
-from payment_statistics_utils.enums.aggregates_enums import (
+from ..enums.aggregates_enums import (
     InitiationChannelEMoney,
     PaymentServiceUserEMoney,
     PaymentServiceUserOTC,
@@ -31,7 +31,7 @@ from payment_statistics_utils.enums.aggregates_enums import (
     PaymentTypeOTC,
     PaymentTypePaymentInitiationServices,
 )
-from payment_statistics_utils.enums.field_metadata_enums import (
+from ..enums.field_metadata_enums import (
     CounterPartyCountryOtherMeta,
     DateFromMeta,
     DateToMeta,
@@ -49,22 +49,22 @@ from payment_statistics_utils.enums.field_metadata_enums import (
     TransactionDayMeta,
     TransactionValueOtherMeta,
 )
-from payment_statistics_utils.enums.full_enums import (
+from ..enums.full_enums import (
     PaymentServiceUser,
     PispInitiatedTransaction,
     RemoteInitiation,
     RoleInTransaction,
 )
-from payment_statistics_utils.utils.field_validaton_functions import (
+from ..utils.field_validaton_functions import (
     validate_country,
     validate_currency,
     validate_date,
 )
-from payment_statistics_utils.utils.model_validation_functions import (
+from ..utils.model_validation_functions import (
     valdate_transaction_day_between_dates,
     validate_payment_type_and_reported_payment_type,
 )
-from payment_statistics_utils.utils.types import Country, Currency
+from ..utils.types import Country, Currency
 
 
 class BaseAggregate(BaseModel, extra="forbid"):
