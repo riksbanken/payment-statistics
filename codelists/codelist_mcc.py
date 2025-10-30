@@ -1,6 +1,6 @@
 """Code list for merchant category code."""
 
-from payment_statistics_utils.codelists.codelists import Codelist
+from ..codelists.codelists import Codelist
 
 
 merchant_category_code: Codelist = {  # pragma: no cover
