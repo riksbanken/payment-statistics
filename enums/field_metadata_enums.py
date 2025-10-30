@@ -46,11 +46,11 @@ class ReporterIdMeta(Enum):
 class ReportDatetimeMeta(Enum):
     """Metadata for report_datetime."""
 
-    description = "Date and time when the report file is created. Reported as UTC+1."
+    description = "Date and time when the report file is created. Stated in Swedish local time adjusted for summer time (Europé/Stockholm). Format ISO 8601-1:2019."
 
-    description_swe = "Datum och tid när rapporten skapades. Rapporteras som UTC+1."
+    description_swe = "Datum och tid när rapporten skapades. Anges i svensk lokal tid justerad för sommartid (Europé/Stockholm). Format ISO 8601-1:2019."
 
-    examples = ["2026-11-06 12:20:01"]
+    examples = ["2026-11-06T12:20:01"]
 
     name = "Report date"
 
@@ -126,13 +126,9 @@ class ItemsMeta(Enum):
 class DateFromMeta(Enum):
     """Metadata for date_from."""
 
-    description = (
-        "The date from which the file contains data from, inclusive. Reported as UTC+1."
-    )
+    description = "The date from which the file contains data from, inclusive. Stated in Swedish local time adjusted for summer time (Europé/Stockholm). Format ISO 8601-1:2019."
 
-    description_swe = (
-        "Det datum som filen innehåller data i från, inklusiv. Rapporteras som UTC+1"
-    )
+    description_swe = "Det datum som filen innehåller data i från, inklusive. Anges i svensk lokal tid justerad för sommartid (Europé/Stockholm). Format ISO 8601-1:2019."
 
     examples = ["2025-01-02"]
 
@@ -150,13 +146,9 @@ class DateFromMeta(Enum):
 class DateToMeta(Enum):
     """Metadata for date_to."""
 
-    description = (
-        "The date the file contains data up to and including. Reported as UTC+1."
-    )
+    description = "The date the file contains data up to and including. Stated in Swedish local time adjusted for summer time (Europé/Stockholm). Format ISO 8601-1:2019."
 
-    description_swe = (
-        "Det datum som filen innehåller data till och med. Rapporteras som UTC+1."
-    )
+    description_swe = "Det datum som filen innehåller data till och med. Anges i svensk lokal tid justerad för sommartid (Europé/Stockholm). Format ISO 8601-1:2019."
 
     examples = ["2025-01-02"]
 
@@ -318,11 +310,11 @@ class IdMeta(Enum):
 class TransactionInitiatedMeta(Enum):
     """Metadata for transaction_initiated."""
 
-    description = "Local (merchant's) date and time when the transaction is initiated, can be rounded to nearest hour. Reported as 'Y-m-d H:M:S'."
+    description = "Local (merchant's) date and time when the transaction is initiated, can be rounded to nearest hour. Format ISO 8601-1:2019."
 
-    description_swe = "Lokalt (handlarens) datum och tid när transaktionen initieras, kan avrundas till närmaste timme. Rapporteras som 'Y-m-d H:M:S'."
+    description_swe = "Lokalt (handlarens) datum och tid när transaktionen initieras, kan avrundas till närmaste timme. Format ISO 8601-1:2019."
 
-    examples = ["2025-01-02 12:00:00", "2025-01-02 12:20:01"]
+    examples = ["2025-01-02T12:00:00", "2025-01-02T12:20:01"]
 
     name = "Transaction initiated"
 
@@ -330,19 +322,19 @@ class TransactionInitiatedMeta(Enum):
 
     field = "transaction_initiated"
 
-    mandatory = "Partly. The attribute is mandatory for Mastercard transactions, for other schemes the attribute is reported if available."
+    mandatory = "The attribute is reported if available."
 
-    mandatory_swe = "Delvis. Attributet är obligatoriskt för Mastercard transaktioner, för övriga betalningsordrar/scheme rapporteras attributet om det finns tillgängligt. "
+    mandatory_swe = "Attributet rapporteras om det finns tillgängligt. "
 
 
 class TransactionTimeMeta(Enum):
     """Metadata for transaction_time."""
 
-    description = "Date and time when the payer's or payee's account is debited or credited, can be rounded to neares hour. Reported as 'Y-m-d H:M:S' in UTC+1."
+    description = "Date and time when the payer's or payee's account is debited or credited, can be rounded to nearest hour. Stated in Swedish local time adjusted for summer time (Europé/Stockholm). Format ISO 8601-1:2019. Must be between or equal to date_from and date_to in the report scheme."
 
-    description_swe = "Datum och tid när betalarens eller betalningsmottagarens konto debiteras eller krediteras, kan avrundas till närmaste timme. Rapporteras som 'Y-m-d H:M:S i UTC+1."
+    description_swe = "Datum och tid när betalarens eller betalningsmottagarens konto debiteras eller krediteras, kan avrundas till närmaste timme. Anges i svensk lokal tid justerad för sommar- tid (Europé/Stockholm). Format ISO 8601-1:2019. Måste var mellan eller lika med date_from och date_to i rapportschemat."
 
-    examples = ["2025-01-02 12:00:00", "2025-01-02 12:20:01"]
+    examples = ["2025-01-02T12:00:00", "2025-01-02T12:20:01"]
 
     name = "Transaction time"
 
@@ -358,11 +350,9 @@ class TransactionTimeMeta(Enum):
 class TransactionClearedMeta(Enum):
     """Meatadata for transaction_cleared."""
 
-    description = "Date when the transaction is cleared. Reported as 'Y-m-d' in UTC+1."
+    description = "Date when the transaction is cleared. Stated in Swedish local time adjusted for summer time (Europé/Stockholm). Must be between or equal to date_from and date_to in the report scheme. Format ISO 8601-1:2019."
 
-    description_swe = (
-        "Datum när transaktionen clearas. Rapporteras som 'Y-m-d' in UTC+1."
-    )
+    description_swe = "Datum när transaktionen clearas. Anges i svensk lokal tid justerad för sommartid (Europé/Stockholm). Måste var mellan eller lika med date_from och date_to i rapport- schemat. Format ISO 8601-1:2019."
 
     examples = ["2024-01-01, 2024-12-31"]
 
@@ -380,9 +370,9 @@ class TransactionClearedMeta(Enum):
 class CounterPartyCountryCardMeta(Enum):
     """Metadata for counterparty_country."""
 
-    description = "The payer's PSP states the country of residence of the payee's PSP. The payee's PSP states the country of residence of the payer's PSP. According to ISO 3166-1, alpha-2 country code."
+    description = "The payer's PSP states the country of residence of the payee's PSP. The payee's PSP states the country of residence of the payer's PSP. Format ISO 3166-1, alpha-2 country code."
 
-    description_swe = "Betalarens betaltjänstleverantör anger hemvistland för betalningsmottagarens betaltjänstleverantör. Betalningsmottagarens betaltjänstleverantör anger hemvistland för betalarens betaltjänstleverantör. Enligt ISO 3166-1, alpha-2 landkoder."
+    description_swe = "Betalarens betaltjänstleverantör anger hemvistland för betalnings- mottagarens betaltjänstleverantör. Betalningsmottagarens betaltjänst- leverantör anger hemvistland för betalarens betaltjänstleverantör. Format ISO 3166-1, alpha-2 landkoder."
 
     examples = ["SE", "NO"]
 
@@ -402,9 +392,9 @@ class CounterPartyCountryCardMeta(Enum):
 class CounterPartyCountryCardAcquirersMeta(Enum):
     """Metadata for counterparty_country."""
 
-    description = "The payer's PSP states the country of residence of the payee's PSP. The payee's PSP states the country of residence of the payer's PSP. According to ISO 3166-1, alpha-2 country code."
+    description = "The payer's PSP states the country of residence of the payee's PSP. The payee's PSP states the country of residence of the payer's PSP. Format ISO 3166-1, alpha-2 country code."
 
-    description_swe = "Betalarens betaltjänstleverantör anger hemvistland för betalningsmottagarens betaltjänstleverantör. Betalningsmottagarens betaltjänstleverantör anger hemvistland för betalarens betaltjänstleverantör. Enligt ISO 3166-1, alpha-2 landkoder."
+    description_swe = "Betalarens betaltjänstleverantör anger hemvistland för betalnings- mottagarens betaltjänstleverantör. Betalningsmottagarens betaltjänst- leverantör anger hemvistland för betalarens betaltjänstleverantör. Format ISO 3166-1, alpha-2 landkoder."
 
     examples = ["SE", "NO"]
 
@@ -422,9 +412,9 @@ class CounterPartyCountryCardAcquirersMeta(Enum):
 class CounterPartyCountryOtherMeta(Enum):
     """Metadata for counterparty_country."""
 
-    description = "The payer's PSP states the country of residence of the payee's PSP. The payee's PSP states the country of residence of the payer's PSP. IBAN is primarily used as an identifier (secondarily BIC), and the counterparty country is then de facto the country of the payer's or payee's account number. According to ISO 3166-1, alpha-2 country code."
+    description = "The payer's PSP states the country of residence of the payee's PSP. The payee's PSP states the country of residence of the payer's PSP. IBAN is primarily used as an identifier (secondarily BIC), and the counterparty country is then de facto the country of the payer's or payee's account number. Format ISO 3166-1, alpha-2 country code."
 
-    description_swe = "Betalarens betaltjänstleverantör anger hemvistland för betalningsmottagarens betaltjänstleverantör. Betalningsmottagarens betaltjänstleverantör anger hemvistland för betalarens betaltjänstleverantör. IBAN används i första hand som identifierare (andra hand BIC) och motpartslandet är de facto då landet för betalarens eller betalningsmottagarens kontonummer. Enligt ISO 3166-1, alpha-2 landkoder."
+    description_swe = "Betalarens betaltjänstleverantör anger hemvistland för betalnings- mottagarens betaltjänstleverantör. Betalningsmottagarens betaltjänst- leverantör anger hemvistland för betalarens betaltjänstleverantör. IBAN används i första hand som identi- fierare (andra hand BIC) och motpartslandet är de facto då landet för betalarens eller betalnings- mottagarens kontonummer. Format ISO 3166-1, alpha-2 landkoder."
 
     examples = ["SE", "NO"]
 
@@ -442,9 +432,9 @@ class CounterPartyCountryOtherMeta(Enum):
 class CounterPartyCountryPaymentSystemOperatorsMeta(Enum):
     """Metadata for counterparty_country."""
 
-    description = "Cross-border transactions should be distinguished from domestic transactions and reported according to the residence of the sending and receiving participants. Distributed by individual countries according to ISO 3166-1, alpha-2 country code."
+    description = "Cross-border transactions should be distinguished from domestic transactions and reported according to the residence of the sending and receiving participants. Distributed by individual countries, format ISO 3166-1, alpha-2 country code."
 
-    description_swe = "Transaktioner över landsgränser ska särskiljas från inhemska transaktioner och rapporteras efter var de sändande och mottagande deltagarna har sin hemvist. Fördelas på enskilda länder enligt ISO 3166-1, alpha-2 landkoder."
+    description_swe = "Transaktioner över landsgränser ska särskiljas från inhemska transaktioner och rapporteras efter var de sänd- ande och mottagande deltagarna har sin hemvist. Fördelas på enskilda länder, format ISO 3166-1, alpha-2 landkoder."
 
     examples = ["SE", "NO"]
 
@@ -482,9 +472,9 @@ class QuantityItemsMeta(Enum):
 class MerchantLocationMeta(Enum):
     """Metadata for merchant_location."""
 
-    description = "For card-based transactions that are not initiated remotely, the country is the location where the physical terminal is located. For card-based transactions initiated remotely, the country is where the merchant is located. According to ISO 3166-1, alpha-2 country code."
+    description = "For card-based transactions that are not initiated remotely, the country is the location where the physical terminal is located. For card-based transactions initiated remotely, the country is where the merchant is located. Format ISO 3166-1, alpha-2 country code."
 
-    description_swe = "För kortbaserade transaktioner som inte initieras på distans är landet den plats där den fysiska terminalen är belägen. För kortbaserade transaktioner som initieras på distans är landet där handlaren är belägen. Enligt ISO 3166-1, alpha-2 landskod."
+    description_swe = "För kortbaserade transaktioner som inte initieras på distans är landet den plats där den fysiska terminalen är belägen. För kortbaserade transaktioner som initieras på distans är landet där handlaren är belägen. Format ISO 3166-1, alpha-2 landskod."
 
     examples = ["SE", "NO"]
 
@@ -502,10 +492,10 @@ class MerchantLocationMeta(Enum):
 class MerchantLocationQuantityMeta(Enum):
     """Metadata for merchant_location."""
 
-    description = "Refers to the country where the terminal is located. According to ISO 3166-1, alpha-2 country code."
+    description = "Refers to the country where the terminal is located. Format ISO 3166-1, alpha-2 country code."
 
     description_swe = (
-        "Avser land där terminal är belägen. Enligt ISO 3166-1, alpha-2 landskod."
+        "Avser land där terminal är belägen. Format ISO 3166-1, alpha-2 landskod."
     )
 
     examples = ["SE", "NO"]
@@ -524,9 +514,9 @@ class MerchantLocationQuantityMeta(Enum):
 class MerchantLocationATMtransactionMeta(Enum):
     """Metadata for merchant_location."""
 
-    description = "Refers to the country where the ATM is located. According to ISO 3166-1, alpha-2 country code."
+    description = "Refers to the country where the ATM is located. Format ISO 3166-1, alpha-2 country code."
 
-    description_swe = "Avser land där uttagsautomaten är belägen. Enligt ISO 3166-1, alpha-2 landskod."
+    description_swe = "Avser land där uttagsautomaten är belägen. Format ISO 3166-1, alpha-2 landskod."
 
     examples = ["SE", "NO"]
 
@@ -632,9 +622,9 @@ class PaymentTypeDDMeta(Enum):
 class TransactionDayMeta(Enum):
     """Metadata for transaction_day."""
 
-    description = "Date when the payer's or payee's account is debited or credited. Reported as 'Y-m-d' in UTC+1."
+    description = "Date when the payer's or payee's account is debited or credited. Stated in Swedish local time adjusted for summer time (Europé/Stockholm). Must be between or equal to date_from and date_to in the report scheme. Format ISO 8601-1:2019."
 
-    description_swe = "Datum när betalarens eller betalningsmottagarens konto debiteras eller krediteras. Rapporteras som 'Y-m-d i UTC+1."
+    description_swe = "Datum när betalarens eller betalningsmottagarens konto debiteras eller krediteras. Anges i svensk lokal tid justerad för sommar- tid (Europé/Stockholm). Måste var mellan eller lika med date_from och date_to i rapportschemat. Format ISO 8601-1:2019."
 
     examples = ["2024-01-01"]
 
@@ -676,7 +666,7 @@ class RoleInTransactionMeta(Enum):
         "Indicates whether the transaction is reported from the payer's or payee's PSP."
     )
 
-    description_swe = "Avser om transaktionen rapporteras från betalarens eller betalningsmottagarens betaltjänstleverantör."
+    description_swe = "Avser om transaktionen rapporteras från betalarens eller betalnings- mottagarens betaltjänstleverantör."
 
     examples = None
 
@@ -694,9 +684,9 @@ class RoleInTransactionMeta(Enum):
 class PaymentServiceUserMeta(Enum):
     """Metadata for payment_service_user."""
 
-    description = "Refers to a natural or legal person using a payment service as a payer, payee or both."
+    description = "Refers to a natural or legal person using a payment service as a payer or payee."
 
-    description_swe = "Avser en fysisk eller en juridisk person som utnyttjar en betaltjänst i egenskap av betalare, betalningsmottagare eller båda."
+    description_swe = "Avser en fysisk eller en juridisk person som utnyttjar en betaltjänst i egenskap av betalare eller betalningsmottagare."
 
     examples = None
 
@@ -728,7 +718,7 @@ class TransactionTypeMeta(Enum):
 
     mandatory = "Partly. The attribute is mandatory when payment type (payment_type) is Card-based payment transactions."
 
-    mandatory_swe = "Delvis. Attributet är obligatoriskt när betalningstyp (payment_type) är kortbaserade betalningstransaktioner."
+    mandatory_swe = "Delvis. Attributet är obligatoriskt när betalningstyp (payment_type) är kortbaserade betalnings- transaktioner."
 
 
 class TransactionValueOtherMeta(Enum):
@@ -796,11 +786,9 @@ class AccountValueMeta(Enum):
 class AccountCurrencyMeta(Enum):
     """Metadata for account_currency."""
 
-    description = (
-        "Currency code of the account currency. According to ISO 4217-1, alpha-3"
-    )
+    description = "Currency code of the account currency. Format ISO 4217-1, alpha-3"
 
-    description_swe = "Valutakod för kontovalutan. Enligt ISO 4217-1, alpha-3"
+    description_swe = "Valutakod för kontovalutan. Format ISO 4217-1, alpha-3"
 
     examples = ["SEK", "NOK"]
 
@@ -840,11 +828,9 @@ class AccountValueInstantCreditTransfersMeta(Enum):
 class AccountCurrencyInstantCreditTransfersMeta(Enum):
     """Metadata for account_currency."""
 
-    description = (
-        "Currency code of the account currency. According to ISO 4217-1, alpha-3."
-    )
+    description = "Currency code of the account currency. Format ISO 4217-1, alpha-3."
 
-    description_swe = "Valutakod för kontovalutan. Enligt ISO 4217-1, alpha-3."
+    description_swe = "Valutakod för kontovalutan. Format ISO 4217-1, alpha-3."
 
     examples = ["SEK", "NOK"]
 
@@ -932,9 +918,9 @@ class NumberOfQuanityItemsMeta(Enum):
 class SniCodeMeta(Enum):
     """Metadata for sni_code."""
 
-    description = "Refers to industry classification at the 5-digit level. For foreign counterparties, or in exceptional cases where an SNI code is missing, '00000' is indicated."
+    description = "Refers to industry classification at the 5-digit level. For foreign clients, or in exceptional cases where an SNI code is missing, code '00000' is used."
 
-    description_swe = "Avser näringsgrensindelning på 5-siffrig nivå. För utländska motparter eller om SNI kod, i undantagsfall, saknas anges '00000'."
+    description_swe = "Avser näringsgrensindelning på 5-siffrig nivå. För utländska kunder eller om SNI kod, i undantagsfall, saknas anges '00000'."
 
     examples = None
 
@@ -946,7 +932,7 @@ class SniCodeMeta(Enum):
 
     mandatory = "Partly. Mandatory and should only be specified when a non-MFI excl. private persons is the payee. "
 
-    mandatory_swe = "Delvis. Obligatoriskt och ska endast anges när icke-MFI exkl. privatpersoner är betalningsmottagare."
+    mandatory_swe = "Delvis. Obligatoriskt och ska endast anges när icke-MFI exkl. privatpersoner är betalnings- mottagare."
 
 
 class PispInitiatedTransactionMeta(Enum):
@@ -986,9 +972,9 @@ class LocalityMeta(Enum):
 
     field = "locality"
 
-    mandatory = "Partly. Mandatory and should only be specified when attribute merchant location (merchant_location) is Sweden."
+    mandatory = "Partly. Mandatory and should only be specified when attribute merchant location is Sweden."
 
-    mandatory_swe = "Delvis. Obligatoriskt och ska endast anges om attribut handlarens plats (merchant_location) är Sverige."
+    mandatory_swe = "Delvis. Obligatoriskt och ska endast anges om attribut handlarens plats är Sverige."
 
 
 class InitiationChannelMeta(Enum):
@@ -1080,7 +1066,7 @@ class ContactlessMeta(Enum):
 
     description = "Contactless payment is a payment made using a card or other means where the payer and the merchant (and/or their equipment) are in the same physical location and where the communication between the portable device and the point of sale is done using contactless technology. Contact is for example when the cardholder inserts the card into the POS terminal or swipes the card's magnetic stripe in the terminal."
 
-    description_swe = "Kontaktlös betalning är med hjälp av ett kort eller andra medel där betalaren och handlaren (och/eller deras utrustning) befinner sig på samma fysiska plats och där kommunikationen mellan den bärbara enheten och försäljningsstället sker med kontaktlös teknik. Med kontakt är exempelvis när kortinnehavaren sätter in kortet i POS-terminalen eller drar kortets magnetspår i terminalen."
+    description_swe = "Kontaktlös betalning är med hjälp av ett kort eller andra medel där betalaren och handlaren (och/eller deras utrustning) befinner sig på samma fysiska plats och där kommunikationen mellan den bärbara enheten och försäljnings- stället sker med kontaktlös teknik. Med kontakt är exempelvis när kortinnehavaren sätter in kortet i POS-terminalen eller drar kortets magnetspår i terminalen."
 
     examples = None
 
@@ -1142,9 +1128,9 @@ class CardTypeMeta(Enum):
 class MerchantCategoryMeta(Enum):
     """Metadata for merchant_category."""
 
-    description = "A four-digit number used to classify companies by the goods or services they provide. According to ISO 18245."
+    description = "A four-digit number used to classify companies by the goods or services they provide. Format ISO 18245."
 
-    description_swe = "Ett fyrsiffrigt nummer, som används för att klassificera företag efter de varor eller tjänster de tillhandahåller. Anges enligt ISO 18245."
+    description_swe = "Ett fyrsiffrigt nummer, som används för att klassificera företag efter de varor eller tjänster de tillhandahåller. Format ISO 18245."
 
     examples = ["0742", "6211"]
 
@@ -1286,7 +1272,7 @@ class PaymentSystemMetricMeta(Enum):
 
     description = "Refers to the type of data reported. Whether it is transaction data, concentration levels or participant information."
 
-    description_swe = "Avser vilken typ av data som rapporteras. Om det är transaktionsdata, koncentrationsgrader eller deltagarinformation."
+    description_swe = "Avser vilken typ av data som rapporteras. Om det är transaktions- data, koncentrationsgrader eller deltagarinformation."
 
     name = "Payment system metric"
 
@@ -1328,7 +1314,7 @@ class ConcentrationRatioTypeMeta(Enum):
 
     description = "Concentration refers to the market share of the five largest senders of payment transactions within each system, including the central bank. Each participant with individual access to the system shall be counted separately, regardless of whether two or more participants are related or not. The attribute refers to whether it is a concentration degree for the value or number of transactions."
 
-    description_swe = "Koncentrationsgrad avser marknadsandelen för de fem största avsändarna av betalningstransaktioner inom varje system inkl. centralbanken. Varje deltagare som har enskild åtkomst till systemet ska räknas separat, oberoende av om två eller flera deltagare är närstående eller ej. Attributet avser om det är en koncentrationsgrad för värdet eller antal transaktioner."
+    description_swe = "Koncentrationsgrad avser marknadsandelen för de fem största avsändarna av betalningstrans- aktioner inom varje system inkl. centralbanken. Varje deltagare som har enskild åtkomst till systemet ska räknas separat, oberoende av om två eller flera deltagare är närstående eller ej. Attributet avser om det är en koncentrationsgrad för värdet eller antal transaktioner."
 
     examples = None
 
@@ -1392,9 +1378,7 @@ class ParticipantTypeMeta(Enum):
         "Defines whether it is a direct or indirect participant in the payment system."
     )
 
-    description_swe = (
-        "Definierar om det är en direkt eller indirekt deltagare i betalningssystemet."
-    )
+    description_swe = "Definierar om det är en direkt eller indirekt deltagare i betalnings- systemet."
 
     examples = None
 
