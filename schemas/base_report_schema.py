@@ -14,6 +14,7 @@ from pydantic import (
 )
 
 from ..enums.field_metadata_enums import (
+    ActorIdMeta,
     EnvironmentMeta,
     ItemsMeta,
     ReportDatetimeMeta,
@@ -38,6 +39,14 @@ class BaseReport(BaseModel, extra="forbid"):
         description=ReporterIdMeta.description.value,
         examples=ReporterIdMeta.examples.value,
         json_schema_extra={"meta_class": "ReporterIdMeta"},
+    )
+
+    actor_id: str | None = Field(
+        default=None,
+        pattern=r"\b[2-9][0-9]{5}-[0-9]{4}\b",
+        description=ActorIdMeta.description.value,
+        examples=ActorIdMeta.examples.value,
+        json_schema_extra={"meta_class": "ActorIdMeta"},
     )
 
     environment: Environment = Field(
