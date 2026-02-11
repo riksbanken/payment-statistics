@@ -26,9 +26,9 @@ class EnvironmentMeta(Enum):
 class ReporterIdMeta(Enum):
     """Metadata for reporter_id."""
 
-    description = "The reporting institution's corporate registration number."
+    description = "The reporting payment service provider's or payment system operator's corporate registration number."
 
-    description_swe = "Uppgiftslämnarens organisationsnummer."
+    description_swe = "Den rapporterande betaltjänstleverantören eller operatören av betalningssystems organisationsnummer."
 
     examples = ["55XXXX-XXXX"]
 
@@ -41,6 +41,28 @@ class ReporterIdMeta(Enum):
     mandatory = "Yes"
 
     mandatory_swe = "Ja"
+
+
+class ActorIdMeta(Enum):
+    """Metadata for actor."""
+
+    description = "The payment service provider to which the reporting refers, corporate registration number."
+
+    description_swe = (
+        "Betaltjänstleverantören som rapporteringen avsers organisationsnummer."
+    )
+
+    examples = ["55XXXX-XXXX"]
+
+    name = "Actor id"
+
+    name_swe = "Aktörs id"
+
+    field = "actor_id"
+
+    mandatory = "Partly. Mandatory if a payment service provider handles the reporting for another payment service provider. "
+
+    mandatory_swe = "Delvis. Obligatoriskt om en betaltjänst- leverantör sköter rapporteringen åt en annan betaltjänst- leverantör."
 
 
 class ReportDatetimeMeta(Enum):
