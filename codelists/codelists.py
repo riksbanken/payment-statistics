@@ -95,6 +95,8 @@ payment_scheme: dict[PaymentScheme, str] = {
     PaymentScheme.PCS_JCB: "JCB",
     PaymentScheme.PCS_AMEX: "American Express",
     PaymentScheme.PCS_DINE: "Diners and Discover",
+    PaymentScheme.PCS_MCRDB: "Mastercard Bilateral",
+    PaymentScheme.PCS_VISAB: "VISA Bilateral",
     PaymentScheme.PCS_OTH: "Other card schemes",
     PaymentScheme.CTS_NPCI: "NPC Instant credit transfer scheme",
     PaymentScheme.CTS_SEPAI: "The SEPA instant credit transfer (SCT Inst)",
