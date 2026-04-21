@@ -7,6 +7,18 @@ from enum import StrEnum
 
 from pydantic import BaseModel
 
+from payment_statistics_utils.schemas.aggregate_report_schema import AggregateReport
+from payment_statistics_utils.schemas.direct_debits_report_schema import (
+    DirectDebitsReport,
+)
+from payment_statistics_utils.schemas.payment_system_operators_report_schema import (
+    PaymentSystemOperatorsReport,
+)
+from payment_statistics_utils.schemas.quantity_items_report_schema import (
+    QuantityItemsReport,
+)
+from payment_statistics_utils.schemas.transaction_report_schema import TransactionReport
+
 from ..enums.aggregates_enums import (
     PaymentTypeEMoney,
     PaymentTypeMoneyRemittances,
@@ -93,3 +105,12 @@ types_to_validator: dict[type[StrEnum], type[BaseModel]] = {
 for types, validator in types_to_validator.items():
     for _type in list(types):
         VALIDATOR_MAPPING[_type] = validator
+
+
+REPORT_VALIDATOR_MAPPING: dict[str, type[BaseModel]] = {
+    "transactions": TransactionReport,
+    "aggregates": AggregateReport,
+    "direct_debits": DirectDebitsReport,
+    "payment_system_operators": PaymentSystemOperatorsReport,
+    "quantity_items": QuantityItemsReport,
+}
