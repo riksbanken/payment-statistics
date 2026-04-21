@@ -206,6 +206,10 @@ class PaymentSchemeCashTransactionsATMOwners(StrEnum):
 
     PCS_DINE = PaymentScheme.PCS_DINE.value
 
+    PCS_MCRDB = PaymentScheme.PCS_MCRDB.value
+
+    PCS_VISAB = PaymentScheme.PCS_VISAB.value
+
     PCS_OTH = PaymentScheme.PCS_OTH.value
 
 
