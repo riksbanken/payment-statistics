@@ -13,7 +13,6 @@ from pydantic import (
     BaseModel,
     Field,
     PastDate,
-    PastDatetime,
     ValidationError,
     field_validator,
     model_validator,
@@ -61,6 +60,7 @@ from ..enums.transaction_enums import (
     PaymentTypeTransactions,
 )
 from ..utils.field_validaton_functions import (
+    StockholmPastDatetime,
     validate_country,
     validate_currency,
     validate_date,
@@ -356,9 +356,9 @@ class CreditTransfer(BaseTransaction, extra="forbid"):
 
     @field_validator("sni_code", mode="after")
     @classmethod
-    def validate_sni_code(cls, sni_code: str) -> str:
+    def validate_sni_code(cls, sni_code: str) -> str | None:
         """Validate sni code."""
-        return validate_sni_code(sni_code)
+        return None if not sni_code else validate_sni_code(sni_code)
 
     @field_validator("transaction_day", mode="before")
     @classmethod
@@ -509,7 +509,7 @@ class InstantCreditTransfer(BaseTransaction, extra="forbid"):
         json_schema_extra={"meta_class": "CounterPartyCountryOtherMeta"},
     )
 
-    transaction_time: PastDatetime = Field(
+    transaction_time: StockholmPastDatetime = Field(
         ...,
         description=TransactionTimeMeta.description.value,
         examples=TransactionTimeMeta.examples.value,
@@ -573,15 +573,15 @@ class InstantCreditTransfer(BaseTransaction, extra="forbid"):
 
     @field_validator("sni_code", mode="after")
     @classmethod
-    def validate_sni_code(cls, sni_code: str) -> str:
+    def validate_sni_code(cls, sni_code: str) -> str | None:
         """Validate sni code."""
-        return validate_sni_code(sni_code)
+        return None if not sni_code else validate_sni_code(sni_code)
 
     @field_validator("account_currency", mode="after")
     @classmethod
-    def validate_account_currency(cls, account_currency: str) -> str:
+    def validate_account_currency(cls, account_currency: str) -> str | None:
         """Validate that account_currency is alpha_3."""
-        return validate_currency(account_currency)
+        return None if not account_currency else validate_currency(account_currency)
 
     @field_validator("transaction_time", mode="before")
     @classmethod
