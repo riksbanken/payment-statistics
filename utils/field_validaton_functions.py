@@ -3,6 +3,10 @@
 import calendar
 import re
 from datetime import datetime
+from typing import Annotated
+
+from pydantic import AfterValidator
+from zoneinfo import ZoneInfo
 
 from ..codelists.codelist_mcc import merchant_category_code
 from ..codelists.codelist_sni import sni_codes
@@ -90,7 +94,7 @@ def validate_locality(v: str) -> str:
     """Validate locality."""
     if not v:
         return v
-    elif v in localities:
+    elif v.upper() in localities:
         return v.upper()
     else:
         raise ValueError(f"Locality is in incorrect. Got {v}.")
@@ -137,3 +141,13 @@ def validate_last_day_of_month(v: str) -> str:
         )
 
     return v
+
+
+def _past_in_stockholm(v: datetime) -> datetime:
+    tz_sthlm = ZoneInfo("Europe/Stockholm")
+    if v.replace(tzinfo=tz_sthlm) >= datetime.now(tz=tz_sthlm):
+        raise ValueError("report_datetime must be in the past (Europe/Stockholm)")
+    return v
+
+
+StockholmPastDatetime = Annotated[datetime, AfterValidator(_past_in_stockholm)]
