@@ -145,6 +145,10 @@ class PaymentScheme(StrEnum):
 
     PCS_DINE = "PCS_DINE"
 
+    PCS_MCRDB = "PCS_MCRDB"
+
+    PCS_VISAB = "PCS_VISAB"
+
     PCS_OTH = "PCS_OTH"
 
     CTS_NPCI = "CTS_NPCI"

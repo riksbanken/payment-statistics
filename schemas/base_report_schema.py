@@ -9,7 +9,6 @@ from typing import Any
 from pydantic import (
     BaseModel,
     Field,
-    PastDatetime,
     field_validator,
 )
 
@@ -23,6 +22,7 @@ from ..enums.field_metadata_enums import (
 )
 from ..enums.full_enums import Environment
 from ..utils.field_validaton_functions import (
+    StockholmPastDatetime,
     validate_timestamp,
 )
 
@@ -56,7 +56,7 @@ class BaseReport(BaseModel, extra="forbid"):
         json_schema_extra={"meta_class": "EnvironmentMeta"},
     )
 
-    report_datetime: PastDatetime = Field(
+    report_datetime: StockholmPastDatetime = Field(
         ...,
         description=ReportDatetimeMeta.description.value,
         examples=ReportDatetimeMeta.examples.value,

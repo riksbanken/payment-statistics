@@ -87,6 +87,8 @@ payment_scheme_desc: dict[PaymentScheme, str] = {
     PaymentScheme.PCS_JCB: "",
     PaymentScheme.PCS_AMEX: "",
     PaymentScheme.PCS_DINE: "",
+    PaymentScheme.PCS_MCRDB: "A Mastercard is used, and the transaction is handled via a bilateral agreement.",
+    PaymentScheme.PCS_VISAB: "A VISA card is used, and the transaction is handled via a bilateral agreement.",
     PaymentScheme.PCS_OTH: "If the payment scheme is not known, it should be reported as other. If the payment scheme is known but it is not included in the code list, contact the Riksbank and inform them about the payment scheme and the Riksbank will add a code for it.",
     PaymentScheme.CTS_NPCI: "Instant credit transfers in the Nordic currencies.",
     PaymentScheme.CTS_SEPAI: "Instant credit transfers in EUR.",

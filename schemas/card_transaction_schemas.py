@@ -21,7 +21,6 @@ from decimal import Decimal
 from pydantic import (
     Field,
     PastDate,
-    PastDatetime,
     ValidationError,
     field_validator,
     model_validator,
@@ -66,6 +65,7 @@ from ..enums.transaction_enums import (
 )
 from ..schemas.transaction_schemas import BaseTransaction
 from ..utils.field_validaton_functions import (
+    StockholmPastDatetime,
     validate_country,
     validate_currency,
     validate_date,
@@ -91,7 +91,7 @@ class BaseCardPayment(BaseTransaction, extra="forbid"):
     in addition to the base transaction attributes.
     """
 
-    transaction_initiated: PastDatetime | None = Field(
+    transaction_initiated: StockholmPastDatetime | None = Field(
         None,
         description=TransactionInitiatedMeta.description.value,
         examples=TransactionInitiatedMeta.examples.value,
@@ -241,7 +241,9 @@ class CardPaymentIssuer(BaseCardPayment, extra="forbid"):
     @classmethod
     def validate_counterparty_country(cls, counterparty_country: str) -> str:
         """Validate that counterparty_country is None or alpha_2."""
-        if not counterparty_country or counterparty_country.upper() in country.keys():
+        if not counterparty_country:
+            return counterparty_country
+        elif counterparty_country.upper() in country.keys():
             return counterparty_country.upper()
         else:
             raise ValueError(
