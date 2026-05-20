@@ -14,19 +14,29 @@ from ..codelists.codelists import country, currency
 from ..codelists.locality import localities
 
 
+_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+_TIMESTAMP_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")
+
+
 def validate_currency(v: str) -> str:
     """Validates that currencies are part of codelist."""
-    if v.upper() in currency.keys():
-        return v.upper()
-    else:
-        raise ValueError(
-            f"Currency code is incorrect. Got {v}, expected ISO 4217-1 alpha-3 currency code."
-        )
+    upper = v.upper()
+    if upper in currency:
+        return upper
+    raise ValueError(
+        f"Currency code is incorrect. Got {v}, expected ISO 4217-1 alpha-3 currency code."
+    )
 
 
 def validate_country(v: str) -> str:
-    """Validates that countries are part of codelist."""
-    if v.upper() in country.keys():
+    """Validates that countries are part of codelist.
+
+    Additional country codes:
+        XK: Kosovo
+        XX: Codes not in ISO 3166-1 alpha-2 and not in exceptions list.
+    """
+    exceptions = ["XK", "XX"]
+    if v.upper() in country or v.upper() in exceptions:
         return v.upper()
     else:
         raise ValueError(
@@ -35,48 +45,27 @@ def validate_country(v: str) -> str:
 
 
 def validate_date(v: str) -> str:
-    """Validate date format.
-
-    Allowed format is date.
-    Example "2025-01-31".
-    """
-    try:
-        datetime.strptime(v, "%Y-%m-%d").date()
-    except ValueError:
-        raise ValueError(  # noqa: B904
-            f"Date has to be in format '%Y-%m-%d', got {type(v)}: {v}"
-        )
+    """Validate date format. Allowed format is date. Example "2025-01-31"."""
+    if not _DATE_RE.match(v):
+        raise ValueError(f"Date has to be in format '%Y-%m-%d', got {type(v)}: {v}")
     return v
 
 
 def validate_timestamp(v: str) -> str:
-    """Validate timestamp.
-
-    Allowed timestamp format is datetime.
-    Example "2025-01-10T14:00:01."
-    """
-    try:
-        datetime.strptime(v, "%Y-%m-%dT%H:%M:%S")
-    except ValueError:
-        raise ValueError(  # noqa: B904
+    """Validate timestamp. Allowed format is datetime. Example "2025-01-10T14:00:01"."""
+    if not _TIMESTAMP_RE.match(v):
+        raise ValueError(
             f"Timestamp has to be in format '%Y-%m-%dT%H:%M:%S' got {type(v)}: {v}"
         )
     return v
 
 
 def validate_optional_timestamp(v: str | None) -> str | None:
-    """Validate timestamp or None.
-
-    Allowed timestamp format is datetime.
-    Example "2025-01-10T14:00:01."
-    """
+    """Validate timestamp or None."""
     if v is None:
         return v
-
-    try:
-        datetime.strptime(v, "%Y-%m-%dT%H:%M:%S")
-    except ValueError:
-        raise ValueError(  # noqa: B904
+    if not _TIMESTAMP_RE.match(v):
+        raise ValueError(
             f"Timestamp has to be in format '%Y-%m-%dT%H:%M:%S' got {type(v)}: {v}"
         )
     return v
@@ -84,7 +73,7 @@ def validate_optional_timestamp(v: str | None) -> str | None:
 
 def validate_sni_code(v: str) -> str:
     """Validate sni code."""
-    if v.upper() in sni_codes.keys():
+    if v.upper() in sni_codes:
         return v.upper()
     else:
         raise ValueError(f"Sni code is incorrect. Got {v}.")
