@@ -7,18 +7,6 @@ from enum import StrEnum
 
 from pydantic import BaseModel
 
-from payment_statistics_utils.schemas.aggregate_report_schema import AggregateReport
-from payment_statistics_utils.schemas.direct_debits_report_schema import (
-    DirectDebitsReport,
-)
-from payment_statistics_utils.schemas.payment_system_operators_report_schema import (
-    PaymentSystemOperatorsReport,
-)
-from payment_statistics_utils.schemas.quantity_items_report_schema import (
-    QuantityItemsReport,
-)
-from payment_statistics_utils.schemas.transaction_report_schema import TransactionReport
-
 from ..enums.aggregates_enums import (
     PaymentTypeEMoney,
     PaymentTypeMoneyRemittances,
@@ -45,6 +33,7 @@ from ..enums.transaction_enums import (
     PaymentTypeCreditTransfer,
     PaymentTypeInstantCreditTransfer,
 )
+from ..schemas.aggregate_report_schema import AggregateReport
 from ..schemas.aggregate_schemas import (
     OTC,
     EMoney,
@@ -55,11 +44,20 @@ from ..schemas.card_transaction_schemas import (
     CardPaymentAcquirer,
     CardPaymentIssuer,
 )
+from ..schemas.direct_debits_report_schema import (
+    DirectDebitsReport,
+)
 from ..schemas.direct_debits_schema import DirectDebits
+from ..schemas.payment_system_operators_report_schema import (
+    PaymentSystemOperatorsReport,
+)
 from ..schemas.payment_system_operators_schemas import (
     ConcentrationRatio,
     ParticipantsInPaymentSystems,
     TransactionsInPaymentSystems,
+)
+from ..schemas.quantity_items_report_schema import (
+    QuantityItemsReport,
 )
 from ..schemas.quantity_items_schemas import (
     ATMs,
@@ -68,6 +66,7 @@ from ..schemas.quantity_items_schemas import (
     PaymentAccounts,
     PosTerminals,
 )
+from ..schemas.transaction_report_schema import TransactionReport
 from ..schemas.transaction_schemas import (
     CashTransactionsATMOwners,
     CreditTransfer,
