@@ -276,12 +276,16 @@ class CardPaymentIssuer(BaseCardPayment, extra="forbid"):
                 )
             )
 
-        if self.initiation_channel == 1000 and self.contactless != "OTH":
+        if (
+            self.initiation_channel == 1000
+            and self.remote_initiation == "NR"
+            and self.contactless != "OTH"
+        ):
             errors.append(
                 model_validation_error(
                     ("contactless",),
                     self.contactless,
-                    "Non-electronic initiated payments should be reported with attribute contactless as 'OTH'.",
+                    "Non-electronic initiated, none-remote, payments should be reported with attribute contactless as 'OTH'.",
                 )
             )
 
@@ -403,12 +407,16 @@ class CardPaymentAcquirer(BaseCardPayment, extra="forbid"):
                 )
             )
 
-        if self.initiation_channel == 1000 and self.contactless != "OTH":
+        if (
+            self.initiation_channel == 1000
+            and self.remote_initiation == "NR"
+            and self.contactless != "OTH"
+        ):
             errors.append(
                 model_validation_error(
                     ("contactless",),
                     self.contactless,
-                    "Non-electronic initiated payments should be reported with attribute contactless as 'OTH'.",
+                    "Non-electronic initiated, none-remote, payments should be reported with attribute contactless as 'OTH'.",
                 )
             )
 

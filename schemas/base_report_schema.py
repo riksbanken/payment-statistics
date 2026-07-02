@@ -80,12 +80,3 @@ class BaseReport(BaseModel, extra="forbid"):
     def validate_report_datetime(cls, report_datetime: str) -> str:
         """Validate that report date is in correct format."""
         return validate_timestamp(report_datetime)
-
-    @field_validator("items", mode="before")
-    @classmethod
-    def validate_items_length(cls, items: str) -> str:
-        """Validate that lenght of items > 0."""
-        if len(items) > 0:
-            return items
-        else:
-            raise ValueError("There are no items in the report.")
