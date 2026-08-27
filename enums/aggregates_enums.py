@@ -77,3 +77,13 @@ class PaymentServiceUserOTC(StrEnum):
     P = PaymentServiceUser.P.value
 
     NMFIXP = PaymentServiceUser.NMFIXP.value
+
+
+class PaymentServiceUserMoneyRemittances(StrEnum):
+    """Payment service user for OTC."""
+
+    P = PaymentServiceUser.P.value
+
+    NMFIXP = PaymentServiceUser.NMFIXP.value
+
+    MFI = PaymentServiceUser.MFI.value

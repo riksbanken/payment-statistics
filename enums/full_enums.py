@@ -28,6 +28,8 @@ class PaymentServiceUser(StrEnum):
 
     MFI = "MFI"
 
+    XX = "XX"
+
 
 class TransactionType(StrEnum):
     """Transaction type."""
@@ -241,6 +243,8 @@ class PispInitiatedTransaction(StrEnum):
 
     ICT1 = "ICT1"
 
+    ICT01 = "ICT01"
+
     OTH = "OTH"
 
 
@@ -306,6 +310,8 @@ class PaymentSystem(StrEnum):
     BG = "BG"
 
     DC = "DC"
+
+    SWISH = "SWISH"
 
 
 class ParticipantSector(StrEnum):

@@ -24,6 +24,7 @@ from pydantic_core import InitErrorDetails
 from ..enums.aggregates_enums import (
     InitiationChannelEMoney,
     PaymentServiceUserEMoney,
+    PaymentServiceUserMoneyRemittances,
     PaymentServiceUserOTC,
     PaymentTypeAggregates,
     PaymentTypeEMoney,
@@ -263,7 +264,7 @@ class MoneyRemittances(BaseAggregate, extra="forbid"):
         json_schema_extra={"meta_class": "RoleInTransactionMeta"},
     )
 
-    payment_service_user: PaymentServiceUser = Field(
+    payment_service_user: PaymentServiceUserMoneyRemittances = Field(
         ...,
         description=PaymentServiceUserMeta.description.value,
         examples=PaymentServiceUserMeta.examples.value,

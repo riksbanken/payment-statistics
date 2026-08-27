@@ -1290,7 +1290,7 @@ class PaymentSystemMeta(Enum):
 
 
 class PaymentSystemMetricMeta(Enum):
-    """Metadata for payment_system."""
+    """Metadata for payment_system_metric."""
 
     description = "Refers to the type of data reported. Whether it is transaction data, concentration levels or participant information."
 
