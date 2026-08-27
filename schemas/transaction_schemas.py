@@ -44,7 +44,6 @@ from ..enums.field_metadata_enums import (
     TransactionValueOtherMeta,
 )
 from ..enums.full_enums import (
-    PaymentServiceUser,
     RemoteInitiation,
     RoleInTransaction,
 )
@@ -54,6 +53,7 @@ from ..enums.transaction_enums import (
     PaymentSchemeCashTransactionsATMOwners,
     PaymentSchemeCreditTransfer,
     PaymentSchemeInstantCreditTransfer,
+    PaymentServiceUserCreditTransfers,
     PaymentTypeCashTransactionATMOwners,
     PaymentTypeCreditTransfer,
     PaymentTypeInstantCreditTransfer,
@@ -313,7 +313,7 @@ class CreditTransfer(BaseTransaction, extra="forbid"):
         json_schema_extra={"meta_class": "TransactionDayMeta"},
     )
 
-    payment_service_user: PaymentServiceUser = Field(
+    payment_service_user: PaymentServiceUserCreditTransfers = Field(
         ...,
         description=PaymentServiceUserMeta.description.value,
         examples=PaymentServiceUserMeta.examples.value,
@@ -530,7 +530,7 @@ class InstantCreditTransfer(BaseTransaction, extra="forbid"):
         json_schema_extra={"meta_class": "AccountCurrencyInstantCreditTransfersMeta"},
     )
 
-    payment_service_user: PaymentServiceUser = Field(
+    payment_service_user: PaymentServiceUserCreditTransfers = Field(
         ...,
         description=PaymentServiceUserMeta.description.value,
         examples=PaymentServiceUserMeta.examples.value,

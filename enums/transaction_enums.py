@@ -79,6 +79,16 @@ class PaymentServiceUserCardPaymentIssuer(StrEnum):
     NMFIXP = PaymentServiceUser.NMFIXP.value
 
 
+class PaymentServiceUserCreditTransfers(StrEnum):
+    """Payment service user for Credit transfers and Instant credit transfers."""
+
+    P = PaymentServiceUser.P.value
+
+    NMFIXP = PaymentServiceUser.NMFIXP.value
+
+    MFI = PaymentServiceUser.MFI.value
+
+
 class InitiationChannelCardPaymentIssuer(IntEnum):
     """Initiation channel for Card Payment Issuer."""
 

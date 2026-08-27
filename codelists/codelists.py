@@ -115,6 +115,7 @@ payment_service_user: dict[PaymentServiceUser, str] = {
     PaymentServiceUser.P: "Private persons",
     PaymentServiceUser.NMFIXP: "Non-MFI excl. private persons",
     PaymentServiceUser.MFI: "Monetary financial institutions",
+    PaymentServiceUser.XX: "Unknown",
 }
 
 transaction_type: dict[TransactionType, str] = {
@@ -190,6 +191,7 @@ contactless_function: dict[ContactlessFunction, str] = {
 pisp_initiated_transaction: dict[PispInitiatedTransaction, str] = {
     PispInitiatedTransaction.ICT0: "Credit transfer",
     PispInitiatedTransaction.ICT1: "Instant credit transfer",
+    PispInitiatedTransaction.ICT01: "Credit transfers and instant credit transfers",
     PispInitiatedTransaction.OTH: "Other",
 }
 
@@ -208,6 +210,7 @@ payment_system: dict[PaymentSystem, str] = {
     PaymentSystem.RIXI: "RIXInst",
     PaymentSystem.BG: "Bankgirot",
     PaymentSystem.DC: "Dataclearingen",
+    PaymentSystem.SWISH: "SWISH",
 }
 
 participant_type: dict[ParticipantType, str] = {

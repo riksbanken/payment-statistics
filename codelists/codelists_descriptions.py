@@ -107,6 +107,7 @@ payment_service_user_desc: dict[PaymentServiceUser, str] = {
     PaymentServiceUser.P: "Private persons include all private persons that are not sole proprietors or a HIO",
     PaymentServiceUser.NMFIXP: "Non-MFIs excl. private persons are defined as all non-MFIs excl. private persons. Note that self-employed households, i.e. sole proprietors, and Household Non-Profit Organizations (HIOs) are included in the sector Non-MFIs exc. private persons. The public sector is, for example, also included here.",
     PaymentServiceUser.MFI: "In payment statistics, MFIs refer to institutions that are traditionally considered MFIs and companies that are payment service providers. Transactions initiated by MFIs can be, for example, when an MFI purchases office equipment from a retailer or when another MFI initiates a payment (PSP that has an account with the reporting MFI).",
+    PaymentServiceUser.XX: "Used when the payment service user is unknown.",
 }
 
 transaction_type_desc: dict[TransactionType, str] = {
@@ -182,6 +183,7 @@ contactless_function_desc: dict[ContactlessFunction, str] = {
 pisp_initiated_transaction_desc: dict[PispInitiatedTransaction, str] = {
     PispInitiatedTransaction.ICT0: "",
     PispInitiatedTransaction.ICT1: "",
+    PispInitiatedTransaction.ICT01: "Used when it is not possible to distinguish between credit transfers and instant credit transfers.",
     PispInitiatedTransaction.OTH: "",
 }
 
@@ -200,6 +202,7 @@ payment_system_desc: dict[PaymentSystem, str] = {
     PaymentSystem.RIXI: "",
     PaymentSystem.BG: "",
     PaymentSystem.DC: "",
+    PaymentSystem.SWISH: "",
 }
 
 participant_type_desc: dict[ParticipantType, str] = {
