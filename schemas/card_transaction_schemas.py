@@ -28,7 +28,6 @@ from pydantic import (
 from pydantic_core import InitErrorDetails
 from typing_extensions import Self
 
-from ..codelists.codelists import country
 from ..enums.field_metadata_enums import (
     AccountCurrencyMeta,
     AccountValueMeta,
@@ -69,7 +68,6 @@ from ..utils.field_validaton_functions import (
     validate_country,
     validate_currency,
     validate_date,
-    validate_merchant_category_code,
     validate_optional_timestamp,
 )
 from ..utils.model_validation_functions import (
@@ -128,7 +126,7 @@ class BaseCardPayment(BaseTransaction, extra="forbid"):
 
     merchant_category: MerchantCategory = Field(
         ...,
-        pattern=r"^(?:\d{4}|G\d{3})$",
+        pattern=r"^(?:\d{4}|G300|G335|G350|R999)$",
         description=MerchantCategoryMeta.description.value,
         examples=MerchantCategoryMeta.examples.value,
         json_schema_extra={"meta_class": "MerchantCategoryMeta"},
@@ -139,12 +137,6 @@ class BaseCardPayment(BaseTransaction, extra="forbid"):
     def validate_merchant_location(cls, merchant_location: str) -> str:
         """Validate that merchant_location is alpha_2."""
         return validate_country(merchant_location)
-
-    @field_validator("merchant_category", mode="after")
-    @classmethod
-    def validate_merchant_category(cls, merchant_category: str) -> str:
-        """Validate that merchant_category is valid."""
-        return validate_merchant_category_code(merchant_category)
 
     @field_validator("transaction_initiated", mode="before")
     @classmethod
@@ -243,12 +235,7 @@ class CardPaymentIssuer(BaseCardPayment, extra="forbid"):
         """Validate that counterparty_country is None or alpha_2."""
         if not counterparty_country:
             return counterparty_country
-        elif counterparty_country.upper() in country.keys():
-            return counterparty_country.upper()
-        else:
-            raise ValueError(
-                f"Country code is incorrect. Got {counterparty_country}, expected ISO 3166-1 alpha-2 country code or None."
-            )
+        return validate_country(counterparty_country)
 
     @model_validator(mode="after")
     def validate_model(self) -> Self:  # noqa: C901

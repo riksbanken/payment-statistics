@@ -4,11 +4,10 @@ import calendar
 import re
 from datetime import datetime
 from typing import Annotated
-
-from pydantic import AfterValidator
 from zoneinfo import ZoneInfo
 
-from ..codelists.codelist_mcc import merchant_category_code
+from pydantic import AfterValidator
+
 from ..codelists.codelist_sni import sni_codes
 from ..codelists.codelists import country, currency
 from ..codelists.locality import localities
@@ -87,14 +86,6 @@ def validate_locality(v: str) -> str:
         return v.upper()
     else:
         raise ValueError(f"Locality is in incorrect. Got {v}.")
-
-
-def validate_merchant_category_code(v: str) -> str:
-    """Validate that merchant_category code is valid."""
-    if v.upper() in merchant_category_code:
-        return v.upper()
-    else:
-        raise ValueError(f"Merchant category code is incorrect. Got {v}.")
 
 
 def validate_half_year(v: str) -> str:
